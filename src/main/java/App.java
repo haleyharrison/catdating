@@ -20,11 +20,32 @@ import java.util.Set;
      post("/matches", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
        String catsex = request.queryParams("catsex");
+       List<Male> males= Male.all();
        List<Female> females = Female.all();
-       List<Male> males = Male.all();
        model.put("females", females);
        model.put("males", males);
        model.put("template", "templates/matches.vtl");
+       return new ModelAndView(model, layout);
+     }, new VelocityTemplateEngine());
+
+     get("/profile/make", (request, response) -> {
+       HashMap<String, Object> model = new HashMap<String, Object>();
+       model.put("template", "templates/make.vtl");
+       return new ModelAndView(model, layout);
+     }, new VelocityTemplateEngine());
+
+     post("/profile", (request, response) -> {
+       HashMap<String, Object> model = new HashMap<String, Object>();
+       String gender = request.queryParams("gender");
+       String name = request.queryParams("name");
+       String fixedstatus = request.queryParams("fixedstatus");
+       String city = request.queryParams("city");
+
+
+
+       newCat.save();
+       model.put("newCat", newCat);
+       model.put("template", "templates/profile.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
