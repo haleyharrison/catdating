@@ -17,11 +17,13 @@ import java.util.Set;
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
-     post("/matches", (request, response) -> {
+     post ("/matches", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
        String catsex = request.queryParams("catsex");
        List<Male> males= Male.all();
        List<Female> females = Female.all();
+
+       model.put("catsex", catsex);
 
        model.put("females", females);
        model.put("males", males);
@@ -54,7 +56,6 @@ import java.util.Set;
        String city = request.queryParams("city");
        Female femaleCat = new Female (name, fixedstatus, city);
        femaleCat.save();
-
        model.put("femaleCat", femaleCat);
        model.put("template", "templates/femaleprofile.vtl");
        return new ModelAndView(model, layout);
@@ -67,14 +68,28 @@ import java.util.Set;
        String city = request.queryParams("city");
        Male maleCat = new Male (name, fixedstatus, city);
        maleCat.save();
-
        model.put("maleCat", maleCat);
        model.put("template", "templates/maleprofile.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
+     get("profile/female/:id", (request, response) -> {
+       HashMap<String, Object> model = new HashMap<String, Object>();
+       int fId = Integer.parseInt(request.params("id"));
+       Female fCat = Female.find(fId);
+       model.put("fCat", fCat);
+       model.put("template", "templates/femaleprofile.vtl");
+       return new ModelAndView(model, layout);
+     }, new VelocityTemplateEngine());
 
-
+     get("profile/male/:id", (request, response) -> {
+       HashMap<String, Object> model = new HashMap<String, Object>();
+       int mId = Integer.parseInt(request.params("id"));
+       Female mCat = Female.find(mId);
+       model.put("mCat", mCat);
+       model.put("template", "templates/femaleprofile.vtl");
+       return new ModelAndView(model, layout);
+     }, new VelocityTemplateEngine());
 
      //
     //  post("/profile", (request, response) -> {
