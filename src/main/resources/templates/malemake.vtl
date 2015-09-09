@@ -1,15 +1,35 @@
-make your profile
+<form class="form-horizontal">
+  <fieldset>
+    <legend>Add your whiskers</legend>
 
-<form action='/profile/male' method='post'>
-<label for="name">your name</label>
-<input id="name" name="name" type="text">
-<br>
-<label for="fixedstatus">are you fixed?</label>
-<input id="fixedstatus" name="fixedstatus" type="text">
-<br>
-<label for="city">your city</label>
-<input id="city" name="city" type="text">
-<br>
-<button type="submit">make your profile</button>
+      <form action='/profile/male' method='post'>
 
+        <div class="form-group">
+          <label for="name" class="col-log-2 control-label">Name</label>
+          <div class="col-lg-10">
+          <input type="text" class="form-control" id="name" placeholder="Name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fixedstatus" class="col-log-2 control-label">Fixed</label>
+          <div class="col-lg-10">
+          <input type="text" class="form-control" id="fixedstatus" placeholder="Yes/No">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="city" class="col-log-2 control-label">City</label>
+          <div class="col-lg-10">
+          <input type="text" class="form-control" id="city" placeholder="City">
+          </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-1- col-lg-offset-2">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+      </form>
+  </fieldset>
 </form>

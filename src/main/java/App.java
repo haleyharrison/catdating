@@ -22,8 +22,9 @@ import java.util.Set;
        String catsex = request.queryParams("catsex");
        List<Male> males= Male.all();
        List<Female> females = Female.all();
-       
+
        model.put("catsex", catsex);
+
        model.put("females", females);
        model.put("males", males);
        model.put("template", "templates/matches.vtl");
