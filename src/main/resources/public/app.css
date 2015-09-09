@@ -1,15 +1,15 @@
 /*body {
   color: red;
 }*/
-.hidden {
-  display: none;
-}
+  .hidden {
+    display: none;
+  }
 
 
-span {
-  color:red;
-}
+  span {
+    color:red;
+  }
 
-.inline {
-  display: inline-block;
-}
+  .inline {
+    display: inline-block;
+  }
