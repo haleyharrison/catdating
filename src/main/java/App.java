@@ -34,24 +34,43 @@ import java.util.Set;
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
-     post("/profile", (request, response) -> {
+     get("profile/male", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
-       String gender = request.queryParams("gender");
-       String name = request.queryParams("name");
-       String fixedstatus = request.queryParams("fixedstatus");
-       String city = request.queryParams("city");
-      
-           if(gender.equals("male")){
-             Male newCat = new Male(name, fixedstatus, gender);
-           } else if ("female"){
-             Female newCat = new Female(name, fixedstatus, gender);
-           }
-
-       newCat.save();
-       model.put("newCat", newCat);
-       model.put("template", "templates/profile.vtl");
+       model.put("template", "templates/malemake.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
+
+     get("profile/female", (request, response) -> {
+       HashMap<String, Object> model = new HashMap<String, Object>();
+       model.put("template", "templates/femalemake.vtl");
+       return new ModelAndView(model, layout);
+     }, new VelocityTemplateEngine());
+
+
+
+     //
+    //  post("/profile", (request, response) -> {
+    //    HashMap<String, Object> model = new HashMap<String, Object>();
+    //    String gender = request.queryParams("gender");
+    //    String name = request.queryParams("name");
+    //    String fixedstatus = request.queryParams("fixedstatus");
+    //    String city = request.queryParams("city");
+     //
+    //        if(gender.equals("male")){
+    //          Male newCat = new Male(name, fixedstatus, gender);
+    //          return newCat;
+     //
+    //        } else {
+    //          Female newCat = new Female(name, fixedstatus, gender);
+    //          return newCat;
+     //
+    //        }
+     //
+     //
+    //    model.put("newCat", newCat);
+    //    model.put("template", "templates/profile.vtl");
+    //    return new ModelAndView(model, layout);
+    //  }, new VelocityTemplateEngine());
 
 
   }//end of main
