@@ -78,16 +78,16 @@ import java.util.Set;
        int fId = Integer.parseInt(request.params("id"));
        Female fCat = Female.find(fId);
        model.put("fCat", fCat);
-       model.put("template", "templates/femaleprofile.vtl");
+       model.put("template", "templates/femaleprofile2.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
      get("profile/male/:id", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
-       int mId = Integer.parseInt(request.params("id"));
+       int mId = Integer.parseInt(request.queryParams("id"));
        Female mCat = Female.find(mId);
        model.put("mCat", mCat);
-       model.put("template", "templates/femaleprofile.vtl");
+       model.put("template", "templates/maleprofile2.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 

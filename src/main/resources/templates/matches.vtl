@@ -3,7 +3,9 @@
 <h1>Browse Queens</h1>
   #foreach($female1 in $females)
     <ul>
-      <li><h4>$female1.getName()<a href="/profile/female/$female.getId()">see her profile</a></h4></li>
+
+      <li>$female1.getName()<a href="/profile/female/$female1.getId()"> see her profile</a></li>
+
     </ul>
   #end
 
@@ -11,7 +13,9 @@
 <h1>Browse Toms</h1>
   #foreach($male1 in $males)
     <ul>
-      <li><h4>$male1.getName()  <a href="/profile/male/$male.getId()">see his profile</a> </h4></li>
+
+      <li>$male1.getName()  <a href="/profile/male/$male1.getId()"> see his profile</a> </li>
+
     </ul>
     #end
 #end
