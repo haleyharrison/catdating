@@ -1,6 +1,13 @@
-/*body {
-  color: red;
-}*/
-/*.hidden {
-  display: none;
-}*/
+
+  .hidden {
+    display: none;
+  }
+
+
+  span {
+    color:red;
+  }
+
+  .inline {
+    display: inline-block;
+  }
