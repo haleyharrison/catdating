@@ -1,21 +1,10 @@
-  <div class="container">
-    <div class="row">  <h1><center>Administrator: Shoe Stores</center></h1>
+<h1>single cats near you!</h1>
 
-        <div class="col-md-6">
-          <div class="well">
-            <h3>Expansion</h5>
-              <h4><a href="/add-brand">Add Brand</a></h4>
-              <h4><a href="/add-store">Add Store</a></h4>
-          </div>
-        </div>
-
-        <div class="col-md-6 ">
-          <div class="well">
-          <h3>Search/Edit Catalog</h3>
-            <h4><a href="/all-brands">Search All Brands</a></h4>
-            <h4><a href="/all-stores">Search All Stores</a></h4>
-          </div>
-        </div>
-
-      </div>
-    </div>
+<form action='/matches' method='post'>
+    <label for="catsex">What's your gender?</label>
+    <select id='catsex' name='catsex' type='text'>
+        <option value="female"> female </option>
+        <option value="male"> male</option>
+    </select>
+    <button type='submit'>show me possible matches!</button>
+</form>
