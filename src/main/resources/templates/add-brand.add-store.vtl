@@ -1,0 +1,32 @@
+<!-- POST /add-brand -->
+    <h2>New Brand: $brand.getBrand()</h2>
+      <form action="/brands/$brand.getId()/addstore" method="post">
+        #if ($stores.size()==0)
+          <p>You cannot add your brand to a store yet. No stores exist. </p>
+
+        #else 
+          <div>
+            <label for="store_id">Add a Store</label>
+            <select id="store_id" name="store_id" type="text">
+              #foreach($store in $stores)
+              <option value="$store.getId()">$store.getStoreName()</option>
+              #end
+            </select>
+            <button type="submit" id="submit">Add</button>
+          </div>
+
+          #if($brandStores)
+          <div>
+            <h5>Stores added for $brand.getBrand()</h5>
+              <ul>
+              #foreach($inputstore in $brandStores)
+              <li>$inputstore.getStoreName()</li>
+              #end
+              </ul>
+          </div>
+          #end
+        #end
+
+      </form>
+
+      <h5 class="clickable"><a href="/"> Homepage</a></h5>
