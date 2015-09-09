@@ -8,6 +8,7 @@ public class Female {
   private String name;
   private String fixed;
   private String city;
+  private String breed;
 
 
   public int getId() {
@@ -69,8 +70,8 @@ public class Female {
       .addParameter("id", id)
       .executeAndFetchFirst(Female.class);
       return brand;
+    }
   }
-}
   public void update(int female_id) {
     this.female_id = female_id;
     try(Connection con = DB.sql2o.open()){
@@ -79,31 +80,42 @@ public class Female {
         .addParameter("female_id", female_id)
         .addParameter("id", id)
         .executeUpdate();
-  }
-}
+      }
+    }
   public void addMale(Male male) {
       try(Connection con = DB.sql2o.open()) {
         String sql = "INSERT INTO matches (female_id, male_id) VALUES (:female_id, :male_id)";
         con.createQuery(sql)
-          .addParameter("brand_id", this.getId())
-          .addParameter("store_id", store.getId())
+          .addParameter("female_id", this.getId())
+          .addParameter("male_id", male.getId())
           .executeUpdate();
       }
     }
 
-    public void delete() {
-  try(Connection con = DB.sql2o.open()) {
-    String deleteQuery = "DELETE FROM brands WHERE id=:id";
-      con.createQuery(deleteQuery)
-        .addParameter("id", id)
-        .executeUpdate();
+    public List<Male> getMales() {
+        try(Connection con = DB.sql2o.open()) {
+          String sql = "SELECT males.* FROM matches Join males on matches.male_id = males.id WHERE female_id = :female_id";
+          List<Male> males = con.createQuery(sql)
+            .addParameter("female_id", this.getId())
+            .executeAndFetch(Male.class);
+            return stores;
+          }
 
-    String joinDeleteQuery = "DELETE FROM stores_brands WHERE brand_id =:brand_id";
-      con.createQuery(joinDeleteQuery)
-        .addParameter("brand_id", this.getId())
-        .executeUpdate();
-  }
-}
+      }
+
+    public void delete() {
+      try(Connection con = DB.sql2o.open()) {
+        String deleteQuery = "DELETE FROM females WHERE id=:id";
+          con.createQuery(deleteQuery)
+            .addParameter("id", id)
+            .executeUpdate();
+
+        String joinDeleteQuery = "DELETE FROM matches WHERE female_id =:female_id";
+          con.createQuery(joinDeleteQuery)
+            .addParameter("female_id", this.getId())
+            .executeUpdate();
+      }
+    }
 
 
 

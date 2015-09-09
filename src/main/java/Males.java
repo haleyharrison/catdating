@@ -2,111 +2,118 @@ import java.util.List;
 import org.sql2o.*;
 import java.util.ArrayList;
 
-public class Store {
+
+public class Male {
   private int id;
-  private String store_name;
+  private String name;
+  private String fixed;
+  private String city;
+  private String breed;
+
 
   public int getId() {
     return id;
   }
 
-  public String getStoreName() {
-    return store_name;
+  public String getName() {
+    return name;
   }
 
-  public Store(String store_name) {
-    this.store_name = store_name;
+  public String getFixed() {
+    return fixed;
+  }
+
+  public String getCity() {
+    return city;
+  }
+  public String getBreed() {
+    return breed;
+  }
+
+  public Male(String name, String fixed, String city){
+    this.name = name;
+    this.fixed = fixed;
+    this.city = city;
+    this.breed = breed;
   }
 
   @Override
-  public boolean equals(Object otherStore) {
-    if(!(otherStore instanceof Store)) {
+  public boolean equals(Object otherMale){
+    if(!(otherMale instanceof Male)) {
       return false;
     } else {
-      Store newStore = (Store) otherStore;
-      return this.getStoreName().equals(newStore.getStoreName());
+      Male newMale = (Male) otherMale;
+      return this.getMale().equals(newMale.getMale());
     }
   }
 
-  public static List<Store> all() {
-    String sql = "SELECT * FROM stores ORDER BY store_name ASC";
+  public static List<Male> all() {
+    String sql = "SELECT id, name, fixed, city, breed FROM males"
     try(Connection con = DB.sql2o.open()) {
-      return con.createQuery(sql).executeAndFetch(Store.class);
-    }
+    return con.createQuery(sql).executeAndFetch(Male.class);
   }
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO stores (store_name) VALUES (:store_name)";
+      String sql = "INSERT INTO males (male_id) VALUES (:male_id)";
       this.id = (int) con.createQuery(sql, true)
-      .addParameter("store_name", this.store_name)
-      .executeUpdate()
-      .getKey();
+        .addParameter("female_id", female_id)
+        .executeUpdate()
+        .getKey();
+    }
+
+  }
+  public static Male find(int id) {
+    try(Connection con = DB.sql2o.open()){
+      String sql ="SELECT * FROM males WHERE id=:id ORDER BY male_id ASC";
+      Brand brand = con.createQuery(sql)
+      .addParameter("id", id)
+      .executeAndFetchFirst(Male.class);
+      return brand;
     }
   }
-
-  public static Store find(int id) {
-      try(Connection con = DB.sql2o.open()) {
-        String sql = "SELECT * FROM stores WHERE id=:id ORDER BY store_name ASC";
-        Store store = con.createQuery(sql)
-          .addParameter("id", id)
-          .executeAndFetchFirst(Store.class);
-        return store;
+  public void update(int male_id) {
+    this.male_id = male_id;
+    try(Connection con = DB.sql2o.open()){
+      String sql = "UPDATE males SET male_id=:male_id WHERE id=:id";
+      con.createQuery(sql)
+        .addParameter("male_id", male_id)
+        .addParameter("id", id)
+        .executeUpdate();
       }
     }
-
-    public void update(String store_name) {
-      this.store_name = store_name;
-        try(Connection con = DB.sql2o.open()) {
-          String sql = "UPDATE stores SET store_name=:store_name WHERE id=:id";
-          con.createQuery(sql)
-            .addParameter("store_name", store_name)
-            .addParameter("id", id) //why do we need the id here but not in others?
-            .executeUpdate();
-        }
-    }
-
-    public void addBrand(Brand brand) {
+  public void addFemale(Female female) {
       try(Connection con = DB.sql2o.open()) {
-        String sql = "INSERT INTO stores_brands (brand_id, store_id) VALUES ( :brand_id, :store_id)";
+        String sql = "INSERT INTO matches (female_id, male_id) VALUES (:female_id, :male_id)";
         con.createQuery(sql)
-          .addParameter("brand_id", brand.getId())
-          .addParameter("store_id", this.getId())
+          .addParameter("male_id", this.getId())
+          .addParameter("female_id", female.getId())
           .executeUpdate();
       }
     }
 
-    public ArrayList<Brand> getBrands() {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT brand_id FROM stores_brands WHERE store_id =:store_id";
-      List<Integer> brandIds = con.createQuery(sql)
-        .addParameter("store_id", this.getId())
-        .executeAndFetch(Integer.class);
+    public List<Female> getFemales() {
+        try(Connection con = DB.sql2o.open()) {
+          String sql = "SELECT females.* FROM matches Join females on matches.female_id = females.id WHERE male_id = :male_id";
+          List<Female> females = con.createQuery(sql)
+            .addParameter("male_id", this.getId())
+            .executeAndFetch(Female.class);
+            return stores;
+          }
+      }
 
-        ArrayList<Brand> brands = new ArrayList<Brand>();
-
-      for(Integer index : brandIds) {
-        String brandQuery = "SELECT * FROM brands WHERE id=:index";
-        Brand brand = con.createQuery(brandQuery)
-          .addParameter("index", index)
-          .executeAndFetchFirst(Brand.class);
-        brands.add(brand);
-      }return brands;
-    }
-  }
     public void delete() {
-    try(Connection con = DB.sql2o.open()) {
-      String deleteQuery = "DELETE FROM stores WHERE id=:id";
-      con.createQuery(deleteQuery)
-      .addParameter("id", id)
-      .executeUpdate();
+      try(Connection con = DB.sql2o.open()) {
+        String deleteQuery = "DELETE FROM males WHERE id=:id";
+          con.createQuery(deleteQuery)
+            .addParameter("id", id)
+            .executeUpdate();
 
-      String joinDeleteQuery = "DELETE from stores_brands WHERE store_id =:store_id";
-      con.createQuery(joinDeleteQuery)
-        .addParameter("store_id", this.getId())
-        .executeUpdate();
+        String joinDeleteQuery = "DELETE FROM matches WHERE male_id =:male_id";
+          con.createQuery(joinDeleteQuery)
+            .addParameter("male_id", this.getId())
+            .executeUpdate();
+      }
     }
-  }
 
-
-}//ends class Author
+}//ends class Course
