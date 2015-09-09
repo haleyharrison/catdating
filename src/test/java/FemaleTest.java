@@ -58,14 +58,21 @@ public class FemaleTest {
         myMale.save();
         Female myFemale = new Female("Nina", "Neutered", "Seattle");
         myFemale.save();
+
         myFemale.addMale(myMale);
         Male savedMale = myFemale.getMales().get(0);
         assertTrue(myMale.equals(savedMale));
-  }
+        }
 
-
-
-
-
+      @Test
+      public void getMales_returnsAllMales_ArrayList() {
+        Male myMale = new Male("Mike", "Neutered", "Portland");
+        myMale.save();
+        Female myFemale = new Female("Nina", "Neutered", "Seattle");
+        myFemale.save();
+        myFemale.addMale(myMale);
+        List savedMales = myFemale.getMales();
+        assertEquals(savedMales.size(), 1);
+      }
 
  }//end StoreTest class

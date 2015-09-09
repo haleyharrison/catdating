@@ -68,23 +68,29 @@ public class Male {
 
   public static Male find(int id) {
     try(Connection con = DB.sql2o.open()){
-      String sql ="SELECT * FROM males WHERE id=:id ORDER BY male_id ASC";
+      String sql ="SELECT * FROM males WHERE id=:id";
       Male male = con.createQuery(sql)
       .addParameter("id", id)
       .executeAndFetchFirst(Male.class);
       return male;
     }
   }
-  public void update(int male_id) {
-    this.id = male_id;
+  public void update(String name, String fixed, String city) {
+    this.name = name;
+    this.fixed = fixed;
+    this.city = city;
     try(Connection con = DB.sql2o.open()){
-      String sql = "UPDATE males SET male_id=:male_id WHERE id=:id";
+      String sql = "UPDATE males SET name=:name, fixed=:fixed, city=:city WHERE id=:id";
       con.createQuery(sql)
-        .addParameter("male_id", male_id)
+        .addParameter("name", name)
+        .addParameter("fixed", fixed)
+        .addParameter("city", city)
         .addParameter("id", id)
         .executeUpdate();
       }
     }
+
+
   public void addFemale(Female female) {
       try(Connection con = DB.sql2o.open()) {
         String sql = "INSERT INTO matches (female_id, male_id) VALUES (:female_id, :male_id)";
