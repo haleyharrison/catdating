@@ -1,3 +1,22 @@
+<<<<<<< HEAD
+// import org.junit.*;
+// import static org.junit.Assert.*;
+// import org.junit.Rule;
+// import java.util.List;
+// import java.util.Arrays;
+// import java.util.ArrayList;
+//
+// public class FemaleTest {
+//
+//      @Rule
+//      public DatabaseRule database = new DatabaseRule();
+//
+//      @Test
+//      public void all_emptyAtFirst() {
+//        assertEquals(Female.all().size(), 0);
+//      }
+//
+=======
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.junit.Rule;
@@ -63,6 +82,7 @@ public class FemaleTest {
         Male savedMale = myFemale.getMales().get(0);
         assertTrue(myMale.equals(savedMale));
         }
+>>>>>>> bf35f007fb4eb7a9c3af73a3d5c431827336a9b1
 
       @Test
       public void getMales_returnsAllMales_ArrayList() {

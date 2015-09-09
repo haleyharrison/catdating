@@ -1,5 +1,19 @@
-#if ($catsex = "female")
-  list males
-#else
-  list females
+#if ($catsex.equals("female"))
+  #foreach($female in $females)
+    <ul>
+      <li>$female.getName()
+      <br>
+      <a href="/profile/female/$female.getId()">see her profile</a>
+      </li>
+    </u>
+
+#if($catsex.equals("male"))
+  #foreach($male in $males)
+    <ul>
+      <li>$male.getName()</li>
+      <br>
+      <a href="/profile/male/$male.getId()">see his profile</a>
+    </u>
 #end
+
+<a href="/profile/make">make your profile</a>
