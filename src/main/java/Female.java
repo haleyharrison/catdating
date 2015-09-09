@@ -56,9 +56,12 @@ public class Female {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO females (female_id) VALUES (:female_id)";
+      String sql = "INSERT INTO females (id, name, fixed, city) VALUES (:id, :name, :fixed, :city)";
       this.id = (int) con.createQuery(sql, true)
-        .addParameter("female_id", id)
+        .addParameter("id", id)
+        .addParameter("name", name)
+        .addParameter("fixed", fixed)
+        .addParameter("city", city)
         .executeUpdate()
         .getKey();
     }
@@ -66,7 +69,7 @@ public class Female {
 
   public static Female find(int id) {
     try(Connection con = DB.sql2o.open()){
-      String sql ="SELECT * FROM females WHERE id=:id ORDER BY female_id ASC";
+      String sql ="SELECT * FROM females WHERE id=:id";
       Female female = con.createQuery(sql)
       .addParameter("id", id)
       .executeAndFetchFirst(Female.class);
