@@ -56,12 +56,11 @@ public class Female {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO females (id, name, fixed, city) VALUES (:id, :name, :fixed, :city)";
+      String sql = "INSERT INTO females (name, fixed, city) VALUES (:name, :fixed, :city)";
       this.id = (int) con.createQuery(sql, true)
-        .addParameter("id", id)
-        .addParameter("name", name)
-        .addParameter("fixed", fixed)
-        .addParameter("city", city)
+        .addParameter("name", this.name)
+        .addParameter("fixed", this.fixed)
+        .addParameter("city", this.city)
         .executeUpdate()
         .getKey();
     }
@@ -77,12 +76,16 @@ public class Female {
     }
   }
 
-  public void update(int female_id) {
-    this.id = female_id;
+  public void updateAll(String name, String fixed, String city) {
+    this.name = name;
+    this.fixed = fixed;
+    this.city = city;
     try(Connection con = DB.sql2o.open()){
-      String sql = "UPDATE females SET female_id=:female_id WHERE id=:id";
+      String sql = "UPDATE females SET name=:name, fixed=:fixed, city=:city WHERE id=:id";
       con.createQuery(sql)
-        .addParameter("female_id", female_id)
+        .addParameter("name", name)
+        .addParameter("fixed", fixed)
+        .addParameter("city", city)
         .addParameter("id", id)
         .executeUpdate();
       }

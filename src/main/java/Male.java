@@ -56,9 +56,11 @@ public class Male {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO males (male_id) VALUES (:male_id)";
+      String sql = "INSERT INTO males (name, fixed, city) VALUES (:name, :fixed, :city)";
       this.id = (int) con.createQuery(sql, true)
-        .addParameter("male_id", id)
+        .addParameter("name", this.name)
+        .addParameter("fixed", this.fixed)
+        .addParameter("city", this.city)
         .executeUpdate()
         .getKey();
     }

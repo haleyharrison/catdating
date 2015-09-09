@@ -34,8 +34,38 @@ public class FemaleTest {
           myFemale.save();
           Female savedFemale = Female.find(myFemale.getId());
           assertTrue(myFemale.equals(savedFemale));
-
         }
+
+      @Test
+      public void update_updatesFemaleFormInDatabase_true() {
+        Female myFemale = new Female("Nina", "Neutered", "Seattle");
+        myFemale.save();
+
+        String name = "Momo";
+        String fixed = "Neut";
+        String city = "Portland";
+
+        myFemale.updateAll(name, fixed, city);
+
+        assertTrue(Female.all().get(0).getName().equals(name));
+        assertTrue(Female.all().get(0).getFixed().equals(fixed));
+        assertTrue(Female.all().get(0).getCity().equals(city));
+      }
+
+      @Test
+      public void addMale_addsMaleToFemale() {
+        Male myMale = new Male("Mike", "Neutered", "Portland");
+        myMale.save();
+        Female myFemale = new Female("Nina", "Neutered", "Seattle");
+        myFemale.save();
+        myFemale.addMale(myMale);
+        Male savedMale = myFemale.getMales().get(0);
+        assertTrue(myMale.equals(savedMale));
+  }
+
+
+
+
 
 
  }//end StoreTest class

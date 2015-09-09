@@ -11,7 +11,22 @@ import java.util.Set;
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
 
-    
+    get("/", (request, response) -> {
+       HashMap<String, Object> model = new HashMap<String, Object>();
+       model.put("template", "templates/index.vtl");
+       return new ModelAndView(model, layout);
+     }, new VelocityTemplateEngine());
+
+     post("/matches", (request, response) -> {
+       HashMap<String, Object> model = new HashMap<String, Object>();
+       String catsex = request.queryParams("catsex");
+       List<Female> females = Female.all();
+       List<Male> males = Male.all();
+       model.put("females", females);
+       model.put("males", males);
+       model.put("template", "templates/matches.vtl");
+       return new ModelAndView(model, layout);
+     }, new VelocityTemplateEngine());
 
 
   }//end of main
