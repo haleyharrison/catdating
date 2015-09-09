@@ -43,37 +43,38 @@ public class Male {
       return false;
     } else {
       Male newMale = (Male) otherMale;
-      return this.getMale().equals(newMale.getMale());
+      return this.getName().equals(newMale.getName());
     }
   }
 
   public static List<Male> all() {
-    String sql = "SELECT id, name, fixed, city, breed FROM males"
+    String sql = "SELECT id, name, fixed, city, breed FROM males";
     try(Connection con = DB.sql2o.open()) {
     return con.createQuery(sql).executeAndFetch(Male.class);
+    }
   }
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO males (male_id) VALUES (:male_id)";
       this.id = (int) con.createQuery(sql, true)
-        .addParameter("female_id", female_id)
+        .addParameter("male_id", id)
         .executeUpdate()
         .getKey();
     }
-
   }
+
   public static Male find(int id) {
     try(Connection con = DB.sql2o.open()){
       String sql ="SELECT * FROM males WHERE id=:id ORDER BY male_id ASC";
-      Brand brand = con.createQuery(sql)
+      Male male = con.createQuery(sql)
       .addParameter("id", id)
       .executeAndFetchFirst(Male.class);
-      return brand;
+      return male;
     }
   }
   public void update(int male_id) {
-    this.male_id = male_id;
+    this.id = male_id;
     try(Connection con = DB.sql2o.open()){
       String sql = "UPDATE males SET male_id=:male_id WHERE id=:id";
       con.createQuery(sql)
@@ -98,7 +99,7 @@ public class Male {
           List<Female> females = con.createQuery(sql)
             .addParameter("male_id", this.getId())
             .executeAndFetch(Female.class);
-            return stores;
+            return females;
           }
       }
 

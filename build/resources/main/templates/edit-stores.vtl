@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <h2>Edit $store.getStoreName()</h2>
+
+    <form action="/stores/$store.getId()/editstore" method="post">
+
+      <div class="form-group">
+        <label for="store_name">Name</label>
+        <input id="store_name" name="store_name" type="text" class="form-control" value="$store.getStoreName()">
+      </div>
+
+      <button type="submit" id="update">Update</button>
+
+    </form>
+
+    <form action="/stores/$store.getId()/addbrand" method="post">
+      #if ($stores.size()==0)
+          <p>You cannot add your brand to a store yet. No stores exist. </p>
+
+      #else 
+        <div>
+          <label for="brand_id">Brands in inventory: </label>
+          <select id="brand_id" name="brand_id" type="text">
+            #foreach($brand in $brands)
+            <option value="$brand.getId()">$brand.getBrand()</option>
+            #end
+          </select>
+          <button type="submit" id="add">Add</button>
+        </div>
+
+        #if($storeBrands)
+           <div>
+              <h5>Stores added for $store.getStoreName()</h5>
+                <ul>
+                  #foreach($inputbrand in $store.getBrands())
+                  <li>$inputbrand.getBrand()</li>
+                  #end
+                </ul>
+          </div>
+        #end
+      #end
+    </form>
+
+    <center><a href="/all-brands">Search brands in catalog</a></center>
+    <center><a href="/">Homepage</a></center>
+
+  </div>
+
+</div>
