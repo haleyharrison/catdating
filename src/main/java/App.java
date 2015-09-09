@@ -40,8 +40,12 @@ import java.util.Set;
        String name = request.queryParams("name");
        String fixedstatus = request.queryParams("fixedstatus");
        String city = request.queryParams("city");
-
-
+      
+           if(gender.equals("male")){
+             Male newCat = new Male(name, fixedstatus, gender);
+           } else if ("female"){
+             Female newCat = new Female(name, fixedstatus, gender);
+           }
 
        newCat.save();
        model.put("newCat", newCat);
