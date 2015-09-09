@@ -46,6 +46,33 @@ import java.util.Set;
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
+     post("profile/female", (request, response) -> {
+       HashMap<String, Object> model = new HashMap<String, Object>();
+       String name = request.queryParams("name");
+       String fixedstatus = request.queryParams("fixedstatus");
+       String city = request.queryParams("city");
+       Female femaleCat = new Female (name, fixedstatus, city);
+       femaleCat.save();
+
+       model.put("femaleCat", femaleCat);
+       model.put("template", "templates/femaleprofile.vtl");
+       return new ModelAndView(model, layout);
+     }, new VelocityTemplateEngine());
+
+     post("profile/male", (request, response) -> {
+       HashMap<String, Object> model = new HashMap<String, Object>();
+       String name = request.queryParams("name");
+       String fixedstatus = request.queryParams("fixedstatus");
+       String city = request.queryParams("city");
+       Male maleCat = new Male (name, fixedstatus, city);
+       maleCat.save();
+
+       model.put("maleCat", maleCat);
+       model.put("template", "templates/maleprofile.vtl");
+       return new ModelAndView(model, layout);
+     }, new VelocityTemplateEngine());
+
+
 
 
      //
