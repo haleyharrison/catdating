@@ -13,3 +13,25 @@
 
 
 <a href="/profile/make">Add your whiskers!</a>
+
+<br><br>
+
+<form action='/females_delete' method='post'>
+    <label for="female_id">delete!</label>
+    <select id='female_id' name='female_id' type='text'>
+      #foreach($female in $females)
+        <option value="$female.getId()"> $female.getName() </option>
+      #end
+    </select>
+    <button type='submit'>delete female</button>
+</form>
+
+<form action='/males_delete' method='post'>
+    <label for="male_id">delete!</label>
+    <select id='male_id' name='male_id' type='text'>
+      #foreach($male in $males)
+        <option value="$male.getId()"> $male.getName() </option>
+      #end
+    </select>
+    <button type='submit'>delete male</button>
+</form>
