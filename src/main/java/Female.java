@@ -117,24 +117,24 @@ public class Female { // extends Cat
             return males;
           }
       }
-      public static List<Male> findByBreed() {
-        try (Connection con = DB.sql2o.open()){
-          String sql = "SELECT * From males where breed =:breed";
-          return con.createQuery(sql).addParameter(":breed", this.getBreed()).executeAndFetch(Male.class);
-        }
-      }
-      public static List<Male> findByCity() {
-        try (Connection con = DB.sql2o.open()){
-          String sql = "SELECT * From males where city =:city";
-          return con.createQuery(sql).addParameter(":city", this.getCity()).executeAndFetch(Male.class);
-        }
-      }
-      public static List<Male> findByCityAndBreed() {
-        try (Connection con = DB.sql2o.open()){
-          String sql = "SELECT * From males where city =:city AND breed =:breed ";
-          return con.createQuery(sql).addParameter(":city", this.getCity()).addParameter(":breed", this.getBreed()).executeAndFetch(Male.class);
-        }
-      }
+      // public static List<Male> findByBreed() {
+      //   try (Connection con = DB.sql2o.open()){
+      //     String sql = "SELECT * From males where breed =:breed";
+      //     return con.createQuery(sql).addParameter(":breed", this.getBreed()).executeAndFetch(Male.class);
+      //   }
+      // }
+      // public static List<Male> findByCity() {
+      //   try (Connection con = DB.sql2o.open()){
+      //     String sql = "SELECT * From males where city =:city";
+      //     return con.createQuery(sql).addParameter(":city", this.getCity()).executeAndFetch(Male.class);
+      //   }
+      // }
+      // public static List<Male> findByCityAndBreed() {
+      //   try (Connection con = DB.sql2o.open()){
+      //     String sql = "SELECT * From males where city =:city AND breed =:breed ";
+      //     return con.createQuery(sql).addParameter(":city", this.getCity()).addParameter(":breed", this.getBreed()).executeAndFetch(Male.class);
+      //   }
+      // }
 
 
     public void delete() {
