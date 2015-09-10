@@ -18,7 +18,7 @@
 </form>
 
 <form action='/maledelete' method='post'>
-    <label for="mId">delete a female</label>
+    <label for="mId">delete a male</label>
     <select id='mId' name='mId' type='text'>
       #foreach($male in $males)
         <option value="$male.getId()"> $male.getName() </option>

@@ -1,18 +1,20 @@
 #if ($prefset)
   #if($prefset == "true")
+    <h1>Available men!</h1>
     #foreach($male in $males)
-      $male.getName()
-      <li>$male.getCity()</li>
-      <li>$male.getFixed()</li>
-      <li>$male.getBreed()</li>
+      <h3>$male.getName()</h3>
+      <li>city: $male.getCity()</li>
+      <li>fixed status: $male.getFixed()</li>
+      <br>
     #end
 
   #else
+  <h1>Available ladies!</h1>
     #foreach($female in $females)
-      $female.getName()
-      <li>$female.getCity()</li>
-      <li>$female.getFixed()</li>
-      <li>$female.getBreed()</li>
+      <h3>$female.getName()</h3>
+      <li>city: $female.getCity()</li>
+      <li>fixed status: $female.getFixed()</li>
+      <br>
     #end
   #end
 #else
