@@ -13,10 +13,7 @@ import java.util.Set;
 
     get("/", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
-      //  List<Male> males= Male.all();
-      //  List<Female> females = Female.all();
-      //  model.put("females", females);
-      //  model.put("males", males);
+
        model.put("template", "templates/make.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
@@ -30,20 +27,20 @@ import java.util.Set;
     //     return null;
     //   });
 
-     post ("/matches", (request, response) -> {
-       HashMap<String, Object> model = new HashMap<String, Object>();
-       String catsex = request.queryParams("catsex");
-
-       List<Male> males= Male.all();
-       List<Female> females = Female.all();
-
-       model.put("catsex", catsex);
-
-       model.put("females", females);
-       model.put("males", males);
-       model.put("template", "templates/browse.vtl");
-       return new ModelAndView(model, layout);
-     }, new VelocityTemplateEngine());
+    //  post ("/matches", (request, response) -> {
+    //    HashMap<String, Object> model = new HashMap<String, Object>();
+    //    String catsex = request.queryParams("catsex");
+     //
+    //    List<Male> males= Male.all();
+    //    List<Female> females = Female.all();
+     //
+    //    model.put("catsex", catsex);
+     //
+    //    model.put("females", females);
+    //    model.put("males", males);
+    //    model.put("template", "templates/browse.vtl");
+    //    return new ModelAndView(model, layout);
+    //  }, new VelocityTemplateEngine());
 
      get("/profile/make", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
@@ -51,19 +48,19 @@ import java.util.Set;
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
-     get("profile/male", (request, response) -> {
+     get("/profile/male", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
        model.put("template", "templates/malemake.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
-     get("profile/female", (request, response) -> {
+     get("/profile/female", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
        model.put("template", "templates/femalemake.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
-     post("profile/female", (request, response) -> {
+     post("/profile/female", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
        String name = request.queryParams("name");
        String fixedstatus = request.queryParams("fixedstatus");
@@ -73,12 +70,13 @@ import java.util.Set;
        Female femaleCat = new Female (preference, name, fixedstatus, city);
        femaleCat.save();
 
+       model.put("malematch", Female.findByCity());
        model.put("femaleCat", femaleCat);
        model.put("template", "templates/femaleprofile.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
-     post("profile/male", (request, response) -> {
+     post("/profile/male", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
        boolean preference = Boolean.parseBoolean(request.queryParams("value"));
 
