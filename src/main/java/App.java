@@ -61,14 +61,14 @@ import java.util.Set;
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
-
+     //Profile page for newly created female cat
      post("/profile/female", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
        String name = request.queryParams("name");
        String fixedstatus = request.queryParams("fixedstatus");
        String city = request.queryParams("city");
 
-       Boolean preference = Boolean.parseBoolean(request.queryParams("value"));
+       boolean preference = Boolean.parseBoolean(request.queryParams("value"));
 
        Female femaleCat = new Female ( name, fixedstatus, city, preference);
        femaleCat.save();

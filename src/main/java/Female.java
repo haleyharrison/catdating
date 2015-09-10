@@ -35,7 +35,7 @@ public class Female { // extends Cat
     return breed;
   }
 
-  public Female(String name, String fixed, String city){
+  public Female(String name, String fixed, String city, Boolean preference){
     this.preference = preference;
     this.name = name;
     this.fixed = fixed;
@@ -63,12 +63,12 @@ public class Female { // extends Cat
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO females (name, fixed, city) VALUES (:name, :fixed, :city)";
+      String sql = "INSERT INTO females (name, fixed, city, preference) VALUES (:name, :fixed, :city, :preference)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
         .addParameter("fixed", this.fixed)
         .addParameter("city", this.city)
-      //  .addParameter("preference", this.preference)
+        .addParameter("preference", this.preference)
         .executeUpdate()
         .getKey();
     }
@@ -127,7 +127,7 @@ public class Female { // extends Cat
       public static List<Male> findByCity(String city) {
         try (Connection con = DB.sql2o.open()){
           String sql = "SELECT * FROM males WHERE city =:city";
-          return con.createQuery(sql).addParameter(":city", city).executeAndFetch(Male.class);
+          return con.createQuery(sql).addParameter("city", city).executeAndFetch(Male.class);
         }
       }
       // public static List<Male> findByCityAndBreed() {
