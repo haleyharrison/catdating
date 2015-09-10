@@ -30,20 +30,19 @@ import java.util.Set;
     //     return null;
     //   });
 
-     post ("/matches", (request, response) -> {
-       HashMap<String, Object> model = new HashMap<String, Object>();
-       String catsex = request.queryParams("catsex");
-
-       List<Male> males= Male.all();
-       List<Female> females = Female.all();
-
-       model.put("catsex", catsex);
-
-       model.put("females", females);
-       model.put("males", males);
-       model.put("template", "templates/browse.vtl");
-       return new ModelAndView(model, layout);
-     }, new VelocityTemplateEngine());
+    //  post ("/matches", (request, response) -> {
+    //    HashMap<String, Object> model = new HashMap<String, Object>();
+    //    String catsex = request.queryParams("catsex");
+    //    List<Male> males= Male.all();
+    //    List<Female> females = Female.all();
+     //
+    //    model.put("catsex", catsex);
+     //
+    //    model.put("females", females);
+    //    model.put("males", males);
+    //    model.put("template", "templates/browse.vtl");
+    //    return new ModelAndView(model, layout);
+    //  }, new VelocityTemplateEngine());
 
      get("/profile/make", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
@@ -68,9 +67,8 @@ import java.util.Set;
        String name = request.queryParams("name");
        String fixedstatus = request.queryParams("fixedstatus");
        String city = request.queryParams("city");
-       boolean preference = Boolean.parseBoolean(request.queryParams("value"));
 
-       Female femaleCat = new Female (preference, name, fixedstatus, city);
+       Female femaleCat = new Female (name, fixedstatus, city);
        femaleCat.save();
 
        model.put("femaleCat", femaleCat);
@@ -80,12 +78,11 @@ import java.util.Set;
 
      post("profile/male", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
-       boolean preference = Boolean.parseBoolean(request.queryParams("value"));
 
        String name = request.queryParams("name");
        String fixedstatus = request.queryParams("fixedstatus");
        String city = request.queryParams("city");
-       Male maleCat = new Male (preference, name, fixedstatus, city);
+       Male maleCat = new Male (name, fixedstatus, city);
        maleCat.save();
        model.put("maleCat", maleCat);
        model.put("template", "templates/maleprofile.vtl");

@@ -3,8 +3,7 @@ import org.sql2o.*;
 import java.util.ArrayList;
 
 
-public class Female { // extends Cat 
-  private boolean preference;
+public class Female { // extends Cat
   private int id;
   private String name;
   private String fixed;
@@ -12,9 +11,6 @@ public class Female { // extends Cat
   private String breed;
 
 
-  public boolean getPreference() {
-    return preference;
-  }
 
   public int getId() {
     return id;
@@ -35,8 +31,7 @@ public class Female { // extends Cat
     return breed;
   }
 
-  public Female(Boolean preference, String name, String fixed, String city){
-    this.preference = preference;
+  public Female(String name, String fixed, String city){
     this.name = name;
     this.fixed = fixed;
     this.city = city;
@@ -132,7 +127,7 @@ public class Female { // extends Cat
       }
     }
 
-  
+
 
 
 }//ends class Course
