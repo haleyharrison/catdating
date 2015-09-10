@@ -116,22 +116,22 @@ public class Male { //extends Cat
             return females;
           }
       }
-      public static List<Female> findByBreed(String breed) {
+      public static List<Female> findByBreed() {
         try (Connection con = DB.sql2o.open()){
           String sql = "SELECT * From females where breed =:breed";
-          return con.createQuery(sql).addParameter(":breed", breed).executeAndFetch(Female.class);
+          return con.createQuery(sql).addParameter(":breed", this.GetBreed()).executeAndFetch(Female.class);
         }
       }
-      public static List<Female> findByCity(String city) {
+      public static List<Female> findByCity() {
         try (Connection con = DB.sql2o.open()){
           String sql = "SELECT * From females where city =:city";
-          return con.createQuery(sql).addParameter(":city", city).executeAndFetch(Female.class);
+          return con.createQuery(sql).addParameter(":city", this.getCity()).executeAndFetch(Female.class);
         }
       }
-      public static List<Female> findByCityAndBreed(String city, String breed) {
+      public static List<Female> findByCityAndBreed() {
         try (Connection con = DB.sql2o.open()){
           String sql = "SELECT * From females where city =:city AND breed =:breed ";
-          return con.createQuery(sql).addParameter(":city", city).addParameter(":breed", breed).executeAndFetch(Male.class);
+          return con.createQuery(sql).addParameter(":city", this.getCity()).addParameter(":breed", this.GetBreed()).executeAndFetch(Male.class);
         }
       }
 
