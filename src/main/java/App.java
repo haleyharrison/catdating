@@ -67,9 +67,9 @@ import java.util.Set;
        String name = request.queryParams("name");
        String fixedstatus = request.queryParams("fixedstatus");
        String city = request.queryParams("city");
-       boolean preference = Boolean.parseBoolean(request.queryParams("value"));
+       Boolean preference = Boolean.parseBoolean(request.queryParams("value"));
 
-       Female femaleCat = new Female (preference, name, fixedstatus, city);
+       Female femaleCat = new Female ( name, fixedstatus, city, preference);
        femaleCat.save();
 
        model.put("malematch", Female.findByCity(city));

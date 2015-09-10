@@ -32,10 +32,11 @@ public class AppTest extends FluentTest{
     goTo("http://localhost:4567/");
     click("a", withText("Are you a queen?"));
     assertThat(pageSource().contains("Add your whiskers"));
-    fill("#name").with("Bob");
+    fill("#name").with("Sue");
     fill("#fixedstatus").with("Yes");
     fill("#city").with("PDX");
-    find("#value").click();
+    find("#false").click();
     submit("#submit");
+    assertThat(pageSource()).contains("Sue");
   }
 }
