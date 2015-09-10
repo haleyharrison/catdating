@@ -116,6 +116,24 @@ public class Male { //extends Cat
             return females;
           }
       }
+      public static List<Female> findByBreed(String breed) {
+        try (Connection con = DB.sql2o.open()){
+          String sql = "SELECT * From females where breed =:breed";
+          return con.createQuery(sql).addParameter(":breed", breed).executeAndFetch(Female.class);
+        }
+      }
+      public static List<Female> findByCity(String city) {
+        try (Connection con = DB.sql2o.open()){
+          String sql = "SELECT * From females where city =:city";
+          return con.createQuery(sql).addParameter(":city", city).executeAndFetch(Female.class);
+        }
+      }
+      public static List<Female> findByCityAndBreed(String city, String breed) {
+        try (Connection con = DB.sql2o.open()){
+          String sql = "SELECT * From females where city =:city AND breed =:breed ";
+          return con.createQuery(sql).addParameter(":city", city).addParameter(":breed", breed).executeAndFetch(Male.class);
+        }
+      }
 
     public void delete() {
       try(Connection con = DB.sql2o.open()) {
