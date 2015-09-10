@@ -127,7 +127,7 @@ public class Female { // extends Cat
       public static List<Male> findByCity() {
           String sql = "SELECT * From males where city =:city";
         try (Connection con = DB.sql2o.open()){
-          return con.createQuery(sql).addParameter(":city", this.getCity()).executeAndFetch(Male.class);
+          return con.createQuery(sql).addParameter("city", this.getCity()).executeAndFetch(Male.class);
         }
       }
       // public static List<Male> findByCityAndBreed() {
