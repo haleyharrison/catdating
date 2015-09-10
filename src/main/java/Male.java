@@ -109,25 +109,25 @@ public class Male {
             .executeAndFetch(Female.class);
             return females;
           }
-      }
-      public static List<Female> findByBreed() {
-        try (Connection con = DB.sql2o.open()){
-          String sql = "SELECT * From females where breed =:breed";
-          return con.createQuery(sql).addParameter(":breed", this.GetBreed()).executeAndFetch(Female.class);
-        }
-      }
-      public static List<Female> findByCity() {
-        try (Connection con = DB.sql2o.open()){
-          String sql = "SELECT * From females where city =:city";
-          return con.createQuery(sql).addParameter(":city", this.getCity()).executeAndFetch(Female.class);
-        }
-      }
-      public static List<Female> findByCityAndBreed() {
-        try (Connection con = DB.sql2o.open()){
-          String sql = "SELECT * From females where city =:city AND breed =:breed ";
-          return con.createQuery(sql).addParameter(":city", this.getCity()).addParameter(":breed", this.GetBreed()).executeAndFetch(Male.class);
-        }
-      }
+       }
+      // public static List<Female> findByBreed() {
+      //   try (Connection con = DB.sql2o.open()){
+      //     String sql = "SELECT * From females where breed =:breed";
+      //     return con.createQuery(sql).addParameter(":breed", this.Getbreed()).executeAndFetch(Female.class);
+      //   }
+      // }
+      // public static List<Female> findByCity() {
+      //   try (Connection con = DB.sql2o.open()){
+      //     String sql = "SELECT * From females where city =:city";
+      //     return con.createQuery(sql).addParameter(":city", this.getcity()).executeAndFetch(Female.class);
+      //   }
+      // }
+      // public static List<Female> findByCityAndBreed() {
+      //   try (Connection con = DB.sql2o.open()){
+      //     String sql = "SELECT * From females where city =:city AND breed =:breed ";
+      //     return con.createQuery(sql).addParameter(":city", this.getCity()).addParameter(":breed", this.getBreed()).executeAndFetch(Male.class);
+      //   }
+      // }
 
     public void delete() {
       try(Connection con = DB.sql2o.open()) {
