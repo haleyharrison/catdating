@@ -20,6 +20,7 @@ import java.util.Set;
      post ("/matches", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
        String catsex = request.queryParams("catsex");
+
        List<Male> males= Male.all();
        List<Female> females = Female.all();
 
@@ -27,7 +28,7 @@ import java.util.Set;
 
        model.put("females", females);
        model.put("males", males);
-       model.put("template", "templates/matches.vtl");
+       model.put("template", "templates/browse.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
@@ -54,8 +55,11 @@ import java.util.Set;
        String name = request.queryParams("name");
        String fixedstatus = request.queryParams("fixedstatus");
        String city = request.queryParams("city");
-       Female femaleCat = new Female (name, fixedstatus, city);
+       boolean preference = Boolean.parseBoolean(request.queryParams("value"));
+
+       Female femaleCat = new Female (boolean, name, fixedstatus, city);
        femaleCat.save();
+
        model.put("femaleCat", femaleCat);
        model.put("template", "templates/femaleprofile.vtl");
        return new ModelAndView(model, layout);
@@ -63,10 +67,11 @@ import java.util.Set;
 
      post("profile/male", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
+       boolean preference =
        String name = request.queryParams("name");
        String fixedstatus = request.queryParams("fixedstatus");
        String city = request.queryParams("city");
-       Male maleCat = new Male (name, fixedstatus, city);
+       Male maleCat = new Male (boolean, name, fixedstatus, city);
        maleCat.save();
        model.put("maleCat", maleCat);
        model.put("template", "templates/maleprofile.vtl");
@@ -78,7 +83,7 @@ import java.util.Set;
        int fId = Integer.parseInt(request.params("id"));
        Female fCat = Female.find(fId);
        model.put("fCat", fCat);
-       model.put("template", "templates/femaleprofile2.vtl");
+       model.put("template", "templates/searchfprofile.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
@@ -87,7 +92,7 @@ import java.util.Set;
        int mId = Integer.parseInt(request.queryParams("id"));
        Female mCat = Female.find(mId);
        model.put("mCat", mCat);
-       model.put("template", "templates/maleprofile2.vtl");
+       model.put("template", "templates/searchmprofile.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 

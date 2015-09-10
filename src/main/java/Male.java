@@ -3,13 +3,17 @@ import org.sql2o.*;
 import java.util.ArrayList;
 
 
-public class Male {
+public class Male { //extends Cat 
+  private boolean preference;
   private int id;
   private String name;
   private String fixed;
   private String city;
   private String breed;
 
+  public boolean preference () {
+    return preference;
+  }
 
   public int getId() {
     return id;
@@ -30,7 +34,8 @@ public class Male {
     return breed;
   }
 
-  public Male(String name, String fixed, String city){
+  public Male(Boolean preference, String name, String fixed, String city){
+    this.preference = preference;
     this.name = name;
     this.fixed = fixed;
     this.city = city;
@@ -48,7 +53,7 @@ public class Male {
   }
 
   public static List<Male> all() {
-    String sql = "SELECT id, name, fixed, city, breed FROM males";
+    String sql = "SELECT id, name, fixed, city, breed, preference FROM males";
     try(Connection con = DB.sql2o.open()) {
     return con.createQuery(sql).executeAndFetch(Male.class);
     }
@@ -56,11 +61,12 @@ public class Male {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO males (name, fixed, city) VALUES (:name, :fixed, :city)";
+      String sql = "INSERT INTO males (name, fixed, city, preference) VALUES (:name, :fixed, :city, :preference)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
         .addParameter("fixed", this.fixed)
         .addParameter("city", this.city)
+        .addParameter("preference", this.preference)
         .executeUpdate()
         .getKey();
     }
