@@ -3,13 +3,18 @@ import org.sql2o.*;
 import java.util.ArrayList;
 
 
-public class Female {
+public class Female { // extends Cat 
+  private boolean preference;
   private int id;
   private String name;
   private String fixed;
   private String city;
   private String breed;
 
+
+  public boolean getPreference() {
+    return preference;
+  }
 
   public int getId() {
     return id;
@@ -30,11 +35,13 @@ public class Female {
     return breed;
   }
 
-  public Female(String name, String fixed, String city){
+  public Female(Boolean preference, String name, String fixed, String city){
+    this.preference = preference;
     this.name = name;
     this.fixed = fixed;
     this.city = city;
     this.breed = breed;
+    // super(String name, String fixed, String city);
   }
 
   @Override
@@ -48,7 +55,7 @@ public class Female {
   }
 
   public static List<Female> all() {
-    String sql = "SELECT id, name, fixed, city, breed FROM females";
+    String sql = "SELECT id, name, fixed, city, breed, preference FROM females";
     try(Connection con = DB.sql2o.open()) {
     return con.createQuery(sql).executeAndFetch(Female.class);
     }
@@ -56,11 +63,12 @@ public class Female {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO females (name, fixed, city) VALUES (:name, :fixed, :city)";
+      String sql = "INSERT INTO females (name, fixed, city, preference) VALUES (:name, :fixed, :city, :preference)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
         .addParameter("fixed", this.fixed)
         .addParameter("city", this.city)
+        .addParameter("preference", this.preference)
         .executeUpdate()
         .getKey();
     }

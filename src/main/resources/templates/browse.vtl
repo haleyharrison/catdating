@@ -1,16 +1,21 @@
 
 #if ($catsex.equals("female"))
+<h1>Browse Queens</h1>
   #foreach($female1 in $females)
     <ul>
+
       <li>$female1.getName()<a href="/profile/female/$female1.getId()"> see her profile</a></li>
+
     </ul>
   #end
 
 #else
-
+<h1>Browse Toms</h1>
   #foreach($male1 in $males)
     <ul>
+
       <li>$male1.getName()  <a href="/profile/male/$male1.getId()"> see his profile</a> </li>
+
     </ul>
     #end
 #end

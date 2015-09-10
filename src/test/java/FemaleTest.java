@@ -36,20 +36,20 @@ public class FemaleTest {
 
      @Test
      public void equals_returnsTrueIfFemalesAreTheSame() {
-      Female firstFemale = new Female ("Nina", "Neutered", "Seattle");
-      Female secondFemale = new Female ("Nina","Neutered", "Seattle");
+      Female firstFemale = new Female (true, "Nina", "Neutered", "Seattle");
+      Female secondFemale = new Female (true, "Nina","Neutered", "Seattle");
       assertTrue(firstFemale.equals(secondFemale));
       }
 
       @Test
       public void save_savesFemaleIntoDatabase_true () {
-        Female newFemale = new Female ("Nina", "Neutered", "Seattle");
+        Female newFemale = new Female (true, "Nina", "Neutered", "Seattle");
         newFemale.save();
         assertTrue(Female.all().get(0).equals(newFemale));
       }
       @Test
         public void find_findsFemaleInDatabase_true() {
-          Female myFemale = new Female("Nina", "Neutered", "Seattle");
+          Female myFemale = new Female(true, "Nina", "Neutered", "Seattle");
           myFemale.save();
           Female savedFemale = Female.find(myFemale.getId());
           assertTrue(myFemale.equals(savedFemale));
@@ -57,9 +57,10 @@ public class FemaleTest {
 
       @Test
       public void update_updatesFemaleFormInDatabase_true() {
-        Female myFemale = new Female("Nina", "Neutered", "Seattle");
+        Female myFemale = new Female(true, "Nina", "Neutered", "Seattle");
         myFemale.save();
 
+        boolean preference = true;
         String name = "Momo";
         String fixed = "Neut";
         String city = "Portland";
@@ -73,9 +74,9 @@ public class FemaleTest {
 
       @Test
       public void addMale_addsMaleToFemale() {
-        Male myMale = new Male("Mike", "Neutered", "Portland");
+        Male myMale = new Male(true, "Mike", "Neutered", "Portland");
         myMale.save();
-        Female myFemale = new Female("Nina", "Neutered", "Seattle");
+        Female myFemale = new Female(true, "Nina", "Neutered", "Seattle");
         myFemale.save();
 
         myFemale.addMale(myMale);
@@ -86,9 +87,9 @@ public class FemaleTest {
 
       @Test
       public void getMales_returnsAllMales_ArrayList() {
-        Male myMale = new Male("Mike", "Neutered", "Portland");
+        Male myMale = new Male(true, "Mike", "Neutered", "Portland");
         myMale.save();
-        Female myFemale = new Female("Nina", "Neutered", "Seattle");
+        Female myFemale = new Female(true, "Nina", "Neutered", "Seattle");
         myFemale.save();
         myFemale.addMale(myMale);
         List savedMales = myFemale.getMales();
