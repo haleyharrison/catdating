@@ -124,10 +124,10 @@ public class Female { // extends Cat
       //   }
       // }
       //
-      public static List<Male> findByCity() {
-          String sql = "SELECT * From males where city =:city";
+      public static List<Male> findByCity(String city) {
         try (Connection con = DB.sql2o.open()){
-          return con.createQuery(sql).addParameter(":city", this.getCity()).executeAndFetch(Male.class);
+          String sql = "SELECT * FROM males WHERE city =:city";
+          return con.createQuery(sql).addParameter(":city", city).executeAndFetch(Male.class);
         }
       }
       // public static List<Male> findByCityAndBreed() {

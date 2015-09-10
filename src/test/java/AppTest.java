@@ -22,6 +22,20 @@ public class AppTest extends FluentTest{
   @Rule
   public DatabaseRule database = new DatabaseRule();
 
-  
+  @Test
+  public void rootTest() {
+    goTo("http://localhost:4567/");
+    assertThat(pageSource().contains("Join"));
+  }
 
+  void FemaleMakeProfile() {
+    goTo("http://localhost:4567/");
+    click("a", withText("Are you a queen?"));
+    assertThat(pageSource().contains("Add your whiskers"));
+    fill("#name").with("Bob");
+    fill("#fixedstatus").with("Yes");
+    fill("#city").with("PDX");
+    find("#value").click();
+    submit("#submit");
+  }
 }
