@@ -22,6 +22,14 @@ import java.util.Set;
      }, new VelocityTemplateEngine());
 
 
+    //  post("/females_delete", (request, response) -> {
+    //     int femaleId = Integer.parseInt(request.queryParams("females_id"));
+    //     Female deadFemale = Female.find(femaleId);
+    //     deadFemale.delete();
+    //     response.redirect("/");
+    //     return null;
+    //   });
+
      post ("/matches", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
        String catsex = request.queryParams("catsex");
