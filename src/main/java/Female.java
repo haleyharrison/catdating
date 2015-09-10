@@ -35,7 +35,7 @@ public class Female { // extends Cat
     return breed;
   }
 
-  public Female(Boolean preference, String name, String fixed, String city){
+  public Female(String name, String fixed, String city){
     this.preference = preference;
     this.name = name;
     this.fixed = fixed;
@@ -55,7 +55,7 @@ public class Female { // extends Cat
   }
 
   public static List<Female> all() {
-    String sql = "SELECT id, name, fixed, city, breed, preference FROM females";
+    String sql = "SELECT id, name, fixed, city, breed FROM females";
     try(Connection con = DB.sql2o.open()) {
     return con.createQuery(sql).executeAndFetch(Female.class);
     }
@@ -63,12 +63,12 @@ public class Female { // extends Cat
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO females (name, fixed, city, preference) VALUES (:name, :fixed, :city, :preference)";
+      String sql = "INSERT INTO females (name, fixed, city) VALUES (:name, :fixed, :city)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
         .addParameter("fixed", this.fixed)
         .addParameter("city", this.city)
-        .addParameter("preference", this.preference)
+      //  .addParameter("preference", this.preference)
         .executeUpdate()
         .getKey();
     }
@@ -83,40 +83,40 @@ public class Female { // extends Cat
       return female;
     }
   }
-
-  public void updateAll(String name, String fixed, String city) {
-    this.name = name;
-    this.fixed = fixed;
-    this.city = city;
-    try(Connection con = DB.sql2o.open()){
-      String sql = "UPDATE females SET name=:name, fixed=:fixed, city=:city WHERE id=:id";
-      con.createQuery(sql)
-        .addParameter("name", name)
-        .addParameter("fixed", fixed)
-        .addParameter("city", city)
-        .addParameter("id", id)
-        .executeUpdate();
-      }
-    }
-  public void addMale(Male male) {
-      try(Connection con = DB.sql2o.open()) {
-        String sql = "INSERT INTO matches (female_id, male_id) VALUES (:female_id, :male_id)";
-        con.createQuery(sql)
-          .addParameter("female_id", this.getId())
-          .addParameter("male_id", male.getId())
-          .executeUpdate();
-      }
-    }
-
-    public List<Male> getMales() {
-        try(Connection con = DB.sql2o.open()) {
-          String sql = "SELECT males.* FROM matches Join males on matches.male_id = males.id WHERE female_id = :female_id";
-          List<Male> males = con.createQuery(sql)
-            .addParameter("female_id", this.getId())
-            .executeAndFetch(Male.class);
-            return males;
-          }
-      }
+  //
+  // public void updateAll(String name, String fixed, String city) {
+  //   this.name = name;
+  //   this.fixed = fixed;
+  //   this.city = city;
+  //   try(Connection con = DB.sql2o.open()){
+  //     String sql = "UPDATE females SET name=:name, fixed=:fixed, city=:city WHERE id=:id";
+  //     con.createQuery(sql)
+  //       .addParameter("name", name)
+  //       .addParameter("fixed", fixed)
+  //       .addParameter("city", city)
+  //       .addParameter("id", id)
+  //       .executeUpdate();
+  //     }
+  //   }
+  // public void addMale(Male male) {
+  //     try(Connection con = DB.sql2o.open()) {
+  //       String sql = "INSERT INTO matches (female_id, male_id) VALUES (:female_id, :male_id)";
+  //       con.createQuery(sql)
+  //         .addParameter("female_id", this.getId())
+  //         .addParameter("male_id", male.getId())
+  //         .executeUpdate();
+  //     }
+  //   }
+  //
+  //   public List<Male> getMales() {
+  //       try(Connection con = DB.sql2o.open()) {
+  //         String sql = "SELECT males.* FROM matches Join males on matches.male_id = males.id WHERE female_id = :female_id";
+  //         List<Male> males = con.createQuery(sql)
+  //           .addParameter("female_id", this.getId())
+  //           .executeAndFetch(Male.class);
+  //           return males;
+  //         }
+  //     }
       // public static List<Male> findByBreed() {
       //   String sql = "SELECT * From males WHERE breed =:breed";
       //   try (Connection con = DB.sql2o.open()){
