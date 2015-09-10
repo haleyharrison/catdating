@@ -1,11 +1,37 @@
-#if (cat.getPreference()) //true
+#if ($prefset)
+  #if($prefset == "true")
+    #foreach($male in $males)
+      $male.getName()
+      <li>$male.getCity()</li>
+      <li>$male.getFixed()</li>
+      <li>$male.getBreed()</li>
+    #end
 
-#else //false
+  #else
+    #foreach($female in $females)
+      $female.getName()
+      <li>$female.getCity()</li>
+      <li>$female.getFixed()</li>
+      <li>$female.getBreed()</li>
+    #end
+  #end
+#else
+  Please set your preferences for browsing!
 
+  <form action="/browse" method="post">
+      <label for="prefset">do you want to see queens or toms?</label>
+      <br>
+      <input type="radio" name="prefset" value="true" id="prefset">toms
+      <br>
+      <input type="radio" name="prefset" value="false" id="prefset">queens
+      <br>
+      <button type="submit">find me hot cats!</button>
+    </form>
+#end
 
+<a href="/">go back to homepage</a>
 
-
-
+<!--
 
 #if ($catsex.equals("female"))
 <h1>Browse Queens</h1>
@@ -49,3 +75,4 @@
 </nav>
 
 <a href="/profile/make">make your profile</a>
+-->

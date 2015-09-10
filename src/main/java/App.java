@@ -13,7 +13,6 @@ import java.util.Set;
 
     get("/", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
-
        model.put("template", "templates/make.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
@@ -111,8 +110,27 @@ import java.util.Set;
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
+     get("/browse", (request, response) -> {
+       HashMap<String, Object> model = new HashMap<String, Object>();
 
+       model.put("males", Male.all());
+       model.put("females", Female.all());
+       model.put("prefset", request.session().attribute("prefset"));
+       model.put("template", "templates/browse.vtl");
+       return new ModelAndView(model, layout);
+     }, new VelocityTemplateEngine());
 
+     post("/browse", (request, response) -> {
+       HashMap<String, Object> model = new HashMap<String, Object>();
+       String inputPref = request.queryParams("prefset");
+       request.session().attribute("prefset", inputPref);
+
+       model.put("males", Male.all());
+       model.put("females", Female.all());
+       model.put("prefset", inputPref);
+       model.put("template", "templates/browse.vtl");
+       return new ModelAndView(model, layout);
+     }, new VelocityTemplateEngine());
      //
     //  post("/profile", (request, response) -> {
     //    HashMap<String, Object> model = new HashMap<String, Object>();
