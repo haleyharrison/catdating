@@ -109,6 +109,25 @@ public class Female {
             return males;
           }
       }
+      public static List<Male> findByBreed(String breed) {
+        try (Connection con = DB.sql2o.open()){
+          String sql = "SELECT * From males where breed =:breed";
+          return con.createQuery(sql).addParameter(":breed", breed).executeAndFetch(Male.class);
+        }
+      }
+      public static List<Male> findByCity(String city) {
+        try (Connection con = DB.sql2o.open()){
+          String sql = "SELECT * From males where city =:city";
+          return con.createQuery(sql).addParameter(":city", city).executeAndFetch(Male.class);
+        }
+      }
+      public static List<Male> findByCityAndBreed(String city, String breed) {
+        try (Connection con = DB.sql2o.open()){
+          String sql = "SELECT * From males where city =:city AND breed =:breed ";
+          return con.createQuery(sql).addParameter(":city", city).addParameter(":breed", breed).executeAndFetch(Male.class);
+        }
+      }
+
 
     public void delete() {
       try(Connection con = DB.sql2o.open()) {
