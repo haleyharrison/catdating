@@ -31,8 +31,13 @@ public class Female { // extends Cat
   public String getCity() {
     return city;
   }
+
   public String getBreed() {
     return breed;
+  }
+
+  public void setBreed(String breed) {
+    this.breed = breed;
   }
 
   public Female(String name, String fixed, String city, Boolean preference){
@@ -40,7 +45,6 @@ public class Female { // extends Cat
     this.name = name;
     this.fixed = fixed;
     this.city = city;
-    this.breed = breed;
     // super(String name, String fixed, String city);
   }
 

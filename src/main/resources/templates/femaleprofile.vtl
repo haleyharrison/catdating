@@ -1,4 +1,4 @@
-<!--Shows a female car her own profile.-->
+<!--Shows a female cat her own profile.-->
 
 <div class="jumbotron">
     <h1>$femaleCat.getName()'s profile</h1>
@@ -16,10 +16,18 @@
     </div>
   </div>
 
+  <div class="panel panel-default">
+    <div class="panel-body">
+      Fixed: $femaleCat.getBreed()
+    </div>
+  </div>
+
 <h2>Meowsters for you:</h2>
   #foreach($male in $malematch)
-    $male.getName()
-    <li>$male.getCity()</li>
-    <li>$male.getFixed()</li>
-    <li>$male.getBreed()</li>
+    <br>
+    <h3><a href="/profile/female/$femaleCat.getId()/$male.getId()">$male.getName()</a></h3>
+      <li>$male.getCity()</li>
+      <li>$male.getFixed()</li>
+      <li>$male.getBreed()</li>
+    </br>
   #end

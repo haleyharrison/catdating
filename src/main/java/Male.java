@@ -3,7 +3,7 @@ import org.sql2o.*;
 import java.util.ArrayList;
 
 
-public class Male { //extends Cat 
+public class Male { //extends Cat
   private boolean preference;
   private int id;
   private String name;
@@ -32,6 +32,10 @@ public class Male { //extends Cat
   }
   public String getBreed() {
     return breed;
+  }
+
+  public void setBreed(String breed) {
+    this.breed = breed;
   }
 
   public Male(Boolean preference, String name, String fixed, String city){
@@ -122,12 +126,12 @@ public class Male { //extends Cat
       //     return con.createQuery(sql).addParameter(":breed", this.Getbreed()).executeAndFetch(Female.class);
       //   }
       // }
-      // public static List<Female> findByCity() {
-      //   try (Connection con = DB.sql2o.open()){
-      //     String sql = "SELECT * From females where city =:city";
-      //     return con.createQuery(sql).addParameter(":city", this.getcity()).executeAndFetch(Female.class);
-      //   }
-      // }
+      public static List<Female> findByCity(String city) {
+        try (Connection con = DB.sql2o.open()){
+          String sql = "SELECT * From females where city =:city";
+          return con.createQuery(sql).addParameter("city", city).executeAndFetch(Female.class);
+        }
+      }
       // public static List<Female> findByCityAndBreed() {
       //   try (Connection con = DB.sql2o.open()){
       //     String sql = "SELECT * From females where city =:city AND breed =:breed ";
