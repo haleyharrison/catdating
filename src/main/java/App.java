@@ -66,10 +66,11 @@ import java.util.Set;
        String name = request.queryParams("name");
        String fixedstatus = request.queryParams("fixedstatus");
        String city = request.queryParams("city");
-
        boolean preference = Boolean.parseBoolean(request.queryParams("value"));
+       String breed = request.queryParams("breed");
 
        Female femaleCat = new Female ( name, fixedstatus, city, preference);
+       femaleCat.setBreed(breed); //set into object before you save the object
        femaleCat.save();
 
        model.put("malematch", Female.findByCity(city));
@@ -80,33 +81,48 @@ import java.util.Set;
 
      post("/profile/male", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
-       boolean preference = Boolean.parseBoolean(request.queryParams("value"));
-
        String name = request.queryParams("name");
        String fixedstatus = request.queryParams("fixedstatus");
        String city = request.queryParams("city");
+       boolean preference = Boolean.parseBoolean(request.queryParams("value"));
+       String breed = request.queryParams("breed");
+
        Male maleCat = new Male (preference, name, fixedstatus, city);
+       maleCat.setBreed(breed); //set into object before you save the object
        maleCat.save();
+
+       model.put("femalematch", Male.findByCity(city));
        model.put("maleCat", maleCat);
        model.put("template", "templates/maleprofile.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
-     get("profile/female/:id", (request, response) -> {
+     get("profile/female/:female_id/:male_id", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
-       int fId = Integer.parseInt(request.params("id"));
-       Female fCat = Female.find(fId);
-       model.put("fCat", fCat);
-       model.put("template", "templates/searchfprofile.vtl");
+
+       int maleId = Integer.parseInt(request.params("male_id"));
+       Male maleCat = Male.find(maleId);
+
+       int femaleId = Integer.parseInt(request.params("female_id"));
+       Female femaleCat = Female.find(femaleId);
+
+       model.put("maleCat", maleCat);
+       model.put("template", "templates/searchmprofile.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
-     get("profile/male/:id", (request, response) -> {
+     get("profile/male/:male_id/:female_id", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
-       int mId = Integer.parseInt(request.queryParams("id"));
-       Female mCat = Female.find(mId);
-       model.put("mCat", mCat);
-       model.put("template", "templates/searchmprofile.vtl");
+
+       int maleId = Integer.parseInt(request.params("male_id"));
+       Male maleCat = Male.find(maleId);
+
+       int femaleId = Integer.parseInt(request.params("female_id"));
+       Female femaleCat = Female.find(femaleId);
+
+
+       model.put("femaleCat", femaleCat);
+       model.put("template", "templates/searchfprofile.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
