@@ -13,9 +13,22 @@ import java.util.Set;
 
     get("/", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
-       model.put("template", "templates/index.vtl");
+       List<Male> males= Male.all();
+       List<Female> females = Female.all();
+       model.put("females", females);
+       model.put("males", males);
+       model.put("template", "templates/make.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
+
+
+    //  post("/females_delete", (request, response) -> {
+    //     int femaleId = Integer.parseInt(request.queryParams("females_id"));
+    //     Female deadFemale = Female.find(femaleId);
+    //     deadFemale.delete();
+    //     response.redirect("/");
+    //     return null;
+    //   });
 
      post ("/matches", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
