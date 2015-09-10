@@ -5,3 +5,24 @@
 <br>
 
 <a href ="/profile/male">Are you a tom?</a>
+
+
+<form action='/femaledelete' method='post'>
+    <label for="fId">delete a female</label>
+    <select id='fId' name='fId' type='text'>
+      #foreach($female in $females)
+        <option value="$female.getId()"> $female.getName() </option>
+      #end
+    </select>
+    <button type='submit'>delete female profile</button>
+</form>
+
+<form action='/maledelete' method='post'>
+    <label for="mId">delete a female</label>
+    <select id='mId' name='mId' type='text'>
+      #foreach($male in $males)
+        <option value="$male.getId()"> $male.getName() </option>
+      #end
+    </select>
+    <button type='submit'>delete male profile</button>
+</form>
