@@ -3,7 +3,7 @@ import org.sql2o.*;
 import java.util.ArrayList;
 
 
-public class Female { // extends Cat 
+public class Female { // extends Cat
   private boolean preference;
   private int id;
   private String name;
@@ -136,7 +136,6 @@ public class Female { // extends Cat
         }
       }
 
-
     public void delete() {
       try(Connection con = DB.sql2o.open()) {
         String deleteQuery = "DELETE FROM females WHERE id=:id";
@@ -151,7 +150,7 @@ public class Female { // extends Cat
       }
     }
 
-  
+
 
 
 }//ends class Course
