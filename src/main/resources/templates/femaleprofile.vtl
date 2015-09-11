@@ -16,18 +16,18 @@
     </div>
   </div>
 
-  <div class="panel panel-default">
+<div class="panel panel-default">
     <div class="panel-body">
-      Fixed: $femaleCat.getBreed()
+      Breed: $femaleCat.getBreed()
     </div>
   </div>
-
+  
 <h2>Meowsters for you:</h2>
   #foreach($male in $malematch)
     <br>
     <h3><a href="/profile/female/$femaleCat.getId()/$male.getId()">$male.getName()</a></h3>
-      <li>$male.getCity()</li>
-      <li>$male.getFixed()</li>
-      <li>$male.getBreed()</li>
+      <li>City: $male.getCity()</li>
+      <li>Fixed: $male.getFixed()</li>
+      <li>Breed: $male.getBreed()</li>
     </br>
   #end

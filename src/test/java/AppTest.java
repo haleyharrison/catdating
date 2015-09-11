@@ -35,8 +35,23 @@ public class AppTest extends FluentTest{
     fill("#name").with("Sue");
     fill("#fixedstatus").with("Yes");
     fill("#city").with("PDX");
+    fill("#breed").with("Calico");
     find("#false").click();
     submit("#submit");
     assertThat(pageSource()).contains("Sue");
   }
+
+  void MaleMakeProfile() {
+    goTo("http://localhost:4567/");
+    click("a", withText("Are you a tom?"));
+    assertThat(pageSource().contains("Add your whiskers"));
+    fill("#name").with("Bob");
+    fill("#fixedstatus").with("Yes");
+    fill("#city").with("PDX");
+    fill("#breed").with("Calico");
+    find("#false").click();
+    submit("#submit");
+    assertThat(pageSource()).contains("Bob");
+  }
+
 }

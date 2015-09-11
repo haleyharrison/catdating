@@ -68,16 +68,19 @@ public class Female { // extends Cat
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO females (name, fixed, city, preference) VALUES (:name, :fixed, :city, :preference)";
+      String sql = "INSERT INTO females (name, fixed, city, preference, breed) VALUES (:name, :fixed, :city, :preference, :breed)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
         .addParameter("fixed", this.fixed)
         .addParameter("city", this.city)
         .addParameter("preference", this.preference)
+        .addParameter("breed", this.breed)
         .executeUpdate()
         .getKey();
     }
   }
+
+
 
   public static Female find(int id) {
     try(Connection con = DB.sql2o.open()){
