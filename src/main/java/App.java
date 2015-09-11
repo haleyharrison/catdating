@@ -79,7 +79,7 @@ import java.util.Set;
        boolean preference = Boolean.parseBoolean(request.queryParams("value"));
        String breed = request.queryParams("breed");
 
-       Female femaleCat = new Female ( name, fixedstatus, city, preference);
+       Female femaleCat = new Female (name, fixedstatus, city, preference);
        femaleCat.setBreed(breed); //set into object before you save the object
        femaleCat.save();
 

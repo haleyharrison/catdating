@@ -65,12 +65,13 @@ public class Male { //extends Cat
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO males (name, fixed, city, preference) VALUES (:name, :fixed, :city, :preference)";
+      String sql = "INSERT INTO males (name, fixed, city, preference, breed) VALUES (:name, :fixed, :city, :preference, :breed)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
         .addParameter("fixed", this.fixed)
         .addParameter("city", this.city)
         .addParameter("preference", this.preference)
+        .addParameter("breed", this.breed)
         .executeUpdate()
         .getKey();
     }
