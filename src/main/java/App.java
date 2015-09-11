@@ -13,18 +13,28 @@ import java.util.Set;
 
     get("/", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
+       model.put("females", Female.all());
+       model.put("males", Male.all());
        model.put("template", "templates/make.vtl");
        return new ModelAndView(model, layout);
      }, new VelocityTemplateEngine());
 
 
-    //  post("/females_delete", (request, response) -> {
-    //     int femaleId = Integer.parseInt(request.queryParams("females_id"));
-    //     Female deadFemale = Female.find(femaleId);
-    //     deadFemale.delete();
-    //     response.redirect("/");
-    //     return null;
-    //   });
+     post("/femaledelete", (request, response) -> {
+        int deadId = Integer.parseInt(request.queryParams("fId"));
+        Female deadFemale = Female.find(deadId);
+        deadFemale.delete();
+        response.redirect("/");
+        return null;
+      });
+
+      post("/maledelete", (request, response) -> {
+         int deadId = Integer.parseInt(request.queryParams("mId"));
+         Male deadMale = Male.find(deadId);
+         deadMale.delete();
+         response.redirect("/");
+         return null;
+       });
 
     //  post ("/browse", (request, response) -> {
     //    HashMap<String, Object> model = new HashMap<String, Object>();
