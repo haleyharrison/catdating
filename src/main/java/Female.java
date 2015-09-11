@@ -40,11 +40,12 @@ public class Female { // extends Cat
     this.breed = breed;
   }
 
-  public Female(String name, String fixed, String city, Boolean preference){
+  public Female(String breed, String name, String fixed, String city, Boolean preference){
     this.preference = preference;
     this.name = name;
     this.fixed = fixed;
     this.city = city;
+    this.breed = breed;
     // super(String name, String fixed, String city);
   }
 
