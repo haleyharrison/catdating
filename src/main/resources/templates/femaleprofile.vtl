@@ -21,8 +21,11 @@
       Breed: $femaleCat.getBreed()
     </div>
   </div>
-  
+
+#if($malematch.size() > 0)
+
 <h2>Meowsters for you:</h2>
+
   #foreach($male in $malematch)
     <br>
     <h3><a href="/profile/female/$femaleCat.getId()/$male.getId()">$male.getName()</a></h3>
@@ -31,3 +34,9 @@
       <li>Breed: $male.getBreed()</li>
     </br>
   #end
+
+
+#else
+ <h2>No one available in your area</h2>
+ <a href="/browse">see locals in other cities</a>
+#end
