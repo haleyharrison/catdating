@@ -40,12 +40,11 @@ public class Female { // extends Cat
     this.breed = breed;
   }
 
-  public Female(String breed, String name, String fixed, String city, Boolean preference){
+  public Female(String name, String fixed, String city, Boolean preference){
     this.preference = preference;
     this.name = name;
     this.fixed = fixed;
     this.city = city;
-    this.breed = breed;
     // super(String name, String fixed, String city);
   }
 
@@ -73,14 +72,12 @@ public class Female { // extends Cat
         .addParameter("name", this.name)
         .addParameter("fixed", this.fixed)
         .addParameter("city", this.city)
-        .addParameter("preference", this.preference)
         .addParameter("breed", this.breed)
+        .addParameter("preference", this.preference)
         .executeUpdate()
         .getKey();
     }
   }
-
-
 
   public static Female find(int id) {
     try(Connection con = DB.sql2o.open()){
